@@ -2,7 +2,7 @@
 
 class CStudent
 {
-private:
+protected:
    int nKoreanScore;
    int nEnglishScore;
    int nMathScore;
