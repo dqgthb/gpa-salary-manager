@@ -118,6 +118,10 @@ void Retrieve()
 
 void Add()
 {
+    std::cout << "Add what?\n"
+              << "(1) Student\n"
+              << "(2) Worker\n"
+              << "(3) Working Student\n";
     int sub_input;
     cin_int(sub_input);
     switch(sub_input){
