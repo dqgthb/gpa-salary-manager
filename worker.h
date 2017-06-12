@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include<iomanip>
 
 class worker
 {
@@ -14,4 +15,7 @@ public:
         std::cout << "copying..." << "\n";}
     int getSalary(){return salary;};
     void setSalary(int _salary){salary=_salary;};
+    void printinfo(){
+        std::cout << std::setw(20) << std::left << "<< salary >> " << std::setw(20) << " goes to memory: " << std::setw(20) << &salary << std::setw(25) << " and set(get) value of " << salary << "\n";
+    }
 };

@@ -1,7 +1,10 @@
 #include <iostream>
-
+#include <iomanip>
+#include "worker.h"
+#include "working_student.h"
 #include "CStudent.h"
 #include "CStudentManager.h"
+#include "cin_validate.h"
 
 using namespace std;
 
@@ -24,18 +27,7 @@ int main()
     {
         PrintMenu();
 
-        // input validation
-        bool bad=false;
-        do{
-            cin>>nMenu;
-            bad=cin.fail();
-            if(bad){
-                std::cout << "Invalid input! Please enter a correct value." << "\n";
-                cin.clear();
-                cin.ignore(255,'\n');
-            }
-        }while(bad);
-        // input validation end
+        cin_int(nMenu);
 
         switch (nMenu)
         {
@@ -56,8 +48,10 @@ int main()
             return 0;
         case 6:
             printall();
+            break;
         default:
             std::cout << "Please enter the correct switch number." << "\n";
+            break;
         }
     }
     return 0;
@@ -124,6 +118,10 @@ void Retrieve()
 
 void Add()
 {
+    int sub_input;
+    cin_int(sub_input);
+    switch(sub_input){
+    }
     if (mgr.GetCount()==MAX_STUDENT_CNT)
     {
         cout<<"There are the maximum number of data."<<endl;
@@ -135,7 +133,7 @@ void Add()
     while (true)
     {
         cout<<"Korean Score?";
-        cin>>nKoreanScore;
+        cin_int(nKoreanScore);
         if (nKoreanScore>=0&&nKoreanScore<=100)
         {
             student.SetKoreanScore(nKoreanScore);
@@ -149,7 +147,7 @@ void Add()
     while (true)
     {
         cout<<"Math Score?";
-        cin>>nMathScore;
+        cin_int(nMathScore);
         if (nMathScore>=0&&nMathScore<=100)
         {
             student.SetMathScore(nMathScore);
@@ -163,7 +161,7 @@ void Add()
     while (true)
     {
         cout<<"English Score?";
-        cin>>nEnglishScore;
+        cin_int(nEnglishScore);
         if (nEnglishScore>=0&&nEnglishScore<=100)
         {
             student.SetEnglishScore(nEnglishScore);
@@ -182,7 +180,7 @@ void Delete()
 {
     int nIndex;
     cout<<"Delete No?>";
-    cin>>nIndex;
+    cin_int(nIndex);
 
     if (nIndex<1||nIndex>mgr.GetCount())
     {
@@ -199,7 +197,7 @@ void Update()
 {
     int nIndex;
     cout<<"Update No?>";
-    cin>>nIndex;
+    cin_int(nIndex);
     if (nIndex<1||nIndex>mgr.GetCount())
     {
         cout<<"There is no data."<<endl;
@@ -212,7 +210,7 @@ void Update()
     while (true)
     {
         cout<<"Korean Score?";
-        cin>>nKoreanScore;
+        cin_int(nKoreanScore);
         if (nKoreanScore>=0&&nKoreanScore<=100)
         {
             student.SetKoreanScore(nKoreanScore);
@@ -226,7 +224,7 @@ void Update()
     while (true)
     {
         cout<<"Math Score?";
-        cin>>nMathScore;
+        cin_int(nMathScore);
         if (nMathScore>=0&&nMathScore<=100)
         {
             student.SetMathScore(nMathScore);
@@ -240,7 +238,7 @@ void Update()
     while (true)
     {
         cout<<"English Score?";
-        cin>>nEnglishScore;
+        cin_int(nEnglishScore);
         if (nEnglishScore>=0&&nEnglishScore<=100)
         {
             student.SetEnglishScore(nEnglishScore);
@@ -269,4 +267,5 @@ void PrintScores(int nIndex)
 
 void printall(){
     std::cout << "printall!" << "\n";
-};
+    mgr.printall();
+}

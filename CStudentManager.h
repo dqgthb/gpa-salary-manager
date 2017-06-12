@@ -12,7 +12,6 @@ private:
     int nCnt;
     int num_workers;
     int num_working_students;
-
     CStudent pStudent[MAX_STUDENT_CNT];
     worker pWorker[MAX_WORKER];
     working_student pWorkingStudent[MAX_WORKING_STUDENT];
@@ -27,4 +26,5 @@ public:
     void Add(CStudent& _pStudent);
     bool Delete(int nIndex);
     bool Update(int nIndex, CStudent& _pStudent);
+    void printall();
 };
