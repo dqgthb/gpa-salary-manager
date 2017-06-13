@@ -113,6 +113,20 @@ void Retrieve(){
             PrintScores(i);
 }
 
+void choose_Add(){
+    int choice = choose();
+    int count = mgr.GetCount(choice);
+    if (count==MAX_STUDENT_CNT){
+        cout<<"There are the maximum number of data."<<endl;
+        return;
+    }
+
+    switch(choice){
+    case 1:
+        return;
+    }
+}
+
 void Add(){
     int choice = choose();
     int count = mgr.GetCount(choice);
@@ -183,11 +197,11 @@ void printall(){
 }
 
 void get_score(const char *msg,student& mys, void (student::*fp)(int)){
-    std::cout << msg <<;
-    int tmp;
-    while(true){
-        cin_int(tmp);
-        if(tmp>=0&&tmp<=100){
+    std::cout << msg;
+    unsigned int tmp;
+    for(;;){
+        cin_validate(tmp);
+        if(tmp<=100){
             (mys.*fp)(tmp);
             break;
         }else
