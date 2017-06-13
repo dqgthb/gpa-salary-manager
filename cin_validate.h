@@ -56,7 +56,6 @@ void cin_validate(T& input){
 void cin_int(int& ref){
     std::string in;
     while(true){
-        std::cout << "type int: ";
         getline(std::cin, in);
         std::stringstream ss(in);
         if(ss >> ref && !(ss >> in)) return;
@@ -71,7 +70,7 @@ template <typename T>
 void cin_validate(T& ref){
     std::string in;
     while(true){
-        std::cout << "type "<< typeid(ref).name() << ": ";
+        //std::cout << "type "<< typeid(ref).name() << ": "; // for debugging
         getline(std::cin, in);
         std::stringstream ss(in);
         if(ss >> ref && !(ss >> in)) return;

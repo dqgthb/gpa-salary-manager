@@ -16,6 +16,7 @@ void Update();
 void Quit();
 void printall();
 void PrintScores(int nIndex);
+void get_score(const char*, student&, void (student::*fp)(int));
 
 studentManager mgr;
 
@@ -132,50 +133,26 @@ void Add()
         return;
     }
 
-    student student;
-    int nKoreanScore=0;
-    while (true)
-    {
-        cout<<"Korean Score?";
-        cin_int(nKoreanScore);
-        if (nKoreanScore>=0&&nKoreanScore<=100)
-        {
-            student.SetKoreanScore(nKoreanScore);
-            break;
-        }
-        else
-            cout<<"The entered value is not from 0 to 100."<<endl;
-    }
+    student mystudent;
 
-    int nMathScore=0;
-    while (true)
-    {
-        cout<<"Math Score?";
-        cin_int(nMathScore);
-        if (nMathScore>=0&&nMathScore<=100)
-        {
-            student.SetMathScore(nMathScore);
-            break;
+    /*
+    auto get_score = [&mystudent](const char *msg, void (student::*fp)(int)){
+        std::cout << msg;
+        int tmp;
+        while(true){
+            cin_int(tmp);
+            if(tmp>=0&&tmp<=100){
+                (mystudent.*fp)(tmp);
+                break;
+            }else
+                std::cerr << "The entered value is not within normal range.\n";
         }
-        else
-            cout<<"The entered value is not from 0 to 100."<<endl;
-    }
-
-    int nEnglishScore=0;
-    while (true)
-    {
-        cout<<"English Score?";
-        cin_int(nEnglishScore);
-        if (nEnglishScore>=0&&nEnglishScore<=100)
-        {
-            student.SetEnglishScore(nEnglishScore);
-            break;
-        }
-        else
-            cout<<"The entered value is not from 0 to 100."<<endl;
-    }
-
-    mgr.Add(student);
+    };
+    */
+    get_score("Korean?:", mystudent, &student::SetKoreanScore);
+    get_score("Math?: ", mystudent, &student::SetMathScore);
+    get_score("English?:", mystudent, &student::SetEnglishScore);
+    mgr.Add(mystudent);
     PrintScores(mgr.GetCount());
     cout<<"Added!"<<endl;
 }
@@ -208,7 +185,7 @@ void Update()
         return;
     }
 
-    student student;
+    student mystudent;
 
     int nKoreanScore=0;
     while (true)
@@ -217,7 +194,7 @@ void Update()
         cin_int(nKoreanScore);
         if (nKoreanScore>=0&&nKoreanScore<=100)
         {
-            student.SetKoreanScore(nKoreanScore);
+            mystudent.SetKoreanScore(nKoreanScore);
             break;
         }
         else
@@ -231,7 +208,7 @@ void Update()
         cin_int(nMathScore);
         if (nMathScore>=0&&nMathScore<=100)
         {
-            student.SetMathScore(nMathScore);
+            mystudent.SetMathScore(nMathScore);
             break;
         }
         else
@@ -245,14 +222,14 @@ void Update()
         cin_int(nEnglishScore);
         if (nEnglishScore>=0&&nEnglishScore<=100)
         {
-            student.SetEnglishScore(nEnglishScore);
+            mystudent.SetEnglishScore(nEnglishScore);
             break;
         }
         else
             cout<<"The entered value is not fot From 0 to 100."<<endl;
     }
 
-    mgr.Update(nIndex, student);
+    mgr.Update(nIndex, mystudent);
     PrintScores(nIndex);
     cout<<"Updated!"<<endl;
 }
@@ -272,4 +249,17 @@ void PrintScores(int nIndex)
 void printall(){
     std::cout << "printall!" << "\n";
     mgr.printall();
+}
+
+void get_score(const char *msg,student& mys, void (student::*fp)(int)){
+    std::cout << msg;
+    int tmp;
+    while(true){
+        cin_int(tmp);
+        if(tmp>=0&&tmp<=100){
+            (mys.*fp)(tmp);
+            break;
+        }else
+            std::cerr << "The entered value is not within normal range.\n";
+    }
 }
