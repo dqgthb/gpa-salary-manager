@@ -1,12 +1,12 @@
 #pragma once
-#include "CStudent.h"
+#include "student.h"
 #include "worker.h"
 
-class working_student: public CStudent, public worker
+class working_student: public student, public worker
 {
 public:
     working_student(){salary=0; nKoreanScore=0; nEnglishScore=0; nMathScore=0;};
-    working_student(working_student& orig): CStudent(), worker(){
+    working_student(working_student& orig): student(), worker(){
         nKoreanScore=orig.nKoreanScore;
         nEnglishScore=orig.nEnglishScore;
         nMathScore=orig.nMathScore;

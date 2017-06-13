@@ -1,43 +1,43 @@
-#include "CStudent.h"
+#include "student.h"
 
-CStudent::CStudent()
+student::student()
 {
    nKoreanScore=0;
    nEnglishScore=0;
    nMathScore=0;
 }
 
-int CStudent::GetKoreanScore()
+int student::GetKoreanScore()
 {
    return nKoreanScore;
 }
 
-int CStudent::GetEnglishScore()
+int student::GetEnglishScore()
 {
    return nEnglishScore;
 }
 
-int CStudent::GetMathScore()
+int student::GetMathScore()
 {
    return nMathScore;
 }
 
-int CStudent::GetTotal()
+int student::GetTotal()
 {
    return nKoreanScore+nEnglishScore+ nMathScore;
 }
 
-void CStudent::SetKoreanScore(int _nKoreanScore)
+void student::SetKoreanScore(int _nKoreanScore)
 {
    nKoreanScore=_nKoreanScore;
 }
 
-void CStudent::SetEnglishScore(int _nEnglishScore)
+void student::SetEnglishScore(int _nEnglishScore)
 {
    nEnglishScore=_nEnglishScore;
 }
 
-void CStudent::SetMathScore(int _nMathScore)
+void student::SetMathScore(int _nMathScore)
 {
    nMathScore=_nMathScore;
 }

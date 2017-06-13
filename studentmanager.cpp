@@ -1,28 +1,28 @@
-#include "CStudent.h"
-#include "CStudentManager.h"
+#include "student.h"
+#include "studentManager.h"
 
-CStudentManager:: CStudentManager()
+studentManager:: studentManager()
 {
    nCnt=0;
 }
 
-int CStudentManager::GetCount()
+int studentManager::GetCount()
 {
    return nCnt;
 }
 
-CStudent CStudentManager::Retrieve(int nIndex)
+student studentManager::Retrieve(int nIndex)
 {
    return pStudent[nIndex - 1];
 }
 
-void CStudentManager::Add(CStudent& _pStudent)
+void studentManager::Add(student& _pStudent)
 {
    pStudent[nCnt]=_pStudent;
    nCnt++;
 }
 
-bool CStudentManager::Delete(int nIndex)
+bool studentManager::Delete(int nIndex)
 {
    if (nIndex<1||nIndex>nCnt)
    {
@@ -37,7 +37,7 @@ bool CStudentManager::Delete(int nIndex)
    return true;
 }
 
-bool CStudentManager::Update(int nIndex, CStudent& _pStudent)
+bool studentManager::Update(int nIndex, student& _pStudent)
 {
    if (nIndex<1||nIndex>nCnt)
    {
@@ -53,7 +53,7 @@ void printallstudents(){
     }
 }
 
-void CStudentManager::printall(){
+void studentManager::printall(){
     auto print_forloop = [](auto ptr, auto nptr){
         for(int i = 0; i<nptr; i++){
             std::cout << std::setw(20) << std::left << "<< i >> " << std::setw(20) << " has value: " << i << "\n";

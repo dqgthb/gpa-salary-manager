@@ -2,8 +2,8 @@
 #include <iomanip>
 #include "worker.h"
 #include "working_student.h"
-#include "CStudent.h"
-#include "CStudentManager.h"
+#include "student.h"
+#include "studentManager.h"
 #include "cin_validate.h"
 
 using namespace std;
@@ -17,7 +17,7 @@ void Quit();
 void printall();
 void PrintScores(int nIndex);
 
-CStudentManager mgr;
+studentManager mgr;
 
 int main()
 {
@@ -132,7 +132,7 @@ void Add()
         return;
     }
 
-    CStudent student;
+    student student;
     int nKoreanScore=0;
     while (true)
     {
@@ -208,7 +208,7 @@ void Update()
         return;
     }
 
-    CStudent student;
+    student student;
 
     int nKoreanScore=0;
     while (true)

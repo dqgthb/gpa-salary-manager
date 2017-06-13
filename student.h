@@ -2,7 +2,7 @@
 #include<iomanip>
 #include<iostream>
 
-class CStudent
+class student
 {
 protected:
     int nKoreanScore;
@@ -10,7 +10,7 @@ protected:
     int nMathScore;
 
 public:
-    CStudent();
+    student();
     int GetKoreanScore();
     int GetEnglishScore();
     int GetMathScore();
