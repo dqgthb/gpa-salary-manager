@@ -1,50 +1,63 @@
 #include "student.h"
-#include "studentManager.h"
+#include "studentmanager.h"
 
-studentManager:: studentManager()
+studentmanager:: studentmanager()
 {
-   nCnt=0;
+    num_students=0;
+}
+int studentmanager::GetCount(){
+    return num_students;
 }
 
-int studentManager::GetCount()
+int studentmanager::GetCount(int choice)
 {
-   return nCnt;
+    switch(choice){
+    case 1:
+        return num_students;
+    case 2:
+        return num_working_students;
+    case 3:
+        return num_workers;
+    default:
+        std::cerr << "wrong choice." << "\n";
+        return -1;
+    }
 }
 
-student studentManager::Retrieve(int nIndex)
+student studentmanager::Retrieve(int nIndex)
 {
-   return pStudent[nIndex - 1];
+    return pStudent[nIndex - 1];
 }
 
-void studentManager::Add(student& _pStudent)
+void studentmanager::Add(student& _pStudent)
 {
-   pStudent[nCnt]=_pStudent;
-   nCnt++;
+    pStudent[num_students]=_pStudent;
+    num_students++;
 }
 
-bool studentManager::Delete(int nIndex)
+bool studentmanager::Delete(int nIndex)
 {
-   if (nIndex<1||nIndex>nCnt)
-   {
-      return false;
-   }
+    if (nIndex<1||nIndex>num_students)
+    {
+        return false;
+    }
 
-   for (int i=nIndex;i<nCnt;i++)
-   {
-      pStudent[i-1]=pStudent[i];
-   }
-   nCnt--;
-   return true;
+    for (int i=nIndex;i<num_students;i++)
+    {
+        pStudent[i-1]=pStudent[i];
+    }
+    num_students--;
+    return true;
 }
 
-bool studentManager::Update(int nIndex, student& _pStudent)
+bool studentmanager::Update(int nIndex, student& _pStudent)
 {
-   if (nIndex<1||nIndex>nCnt)
-   {
-      return false;
-   }
-   pStudent[nIndex-1]=_pStudent;
-   return true;
+    if (nIndex<1||nIndex>num_students)
+    {
+        return false;
+    }
+    pStudent[nIndex-1]=_pStudent;
+    return true;
 }
 
 void printallstudents(){
@@ -53,14 +66,14 @@ void printallstudents(){
     }
 }
 
-void studentManager::printall(){
+void studentmanager::printall(){
     auto print_forloop = [](auto ptr, auto nptr){
         for(int i = 0; i<nptr; i++){
             std::cout << std::setw(20) << std::left << "<< i >> " << std::setw(20) << " has value: " << i << "\n";
             ptr[i].printinfo();};
     };
 
-    print_forloop(pStudent, nCnt);
+    print_forloop(pStudent, num_students);
     print_forloop(pWorker, num_workers);
     print_forloop(pWorkingStudent, num_working_students);
     //Printallworkers(){};

@@ -3,7 +3,7 @@
 #include "worker.h"
 #include "working_student.h"
 #include "student.h"
-#include "studentManager.h"
+#include "studentmanager.h"
 #include "cin_validate.h"
 
 using namespace std;
@@ -17,21 +17,18 @@ void Quit();
 void printall();
 void PrintScores(int nIndex);
 void get_score(const char*, student&, void (student::*fp)(int));
+int choose();
 
-studentManager mgr;
+studentmanager mgr;
 
-int main()
-{
+int main(){
     int nMenu;
 
-    while (true)
-    {
+    while (true){
         PrintMenu();
-
         cin_int(nMenu);
 
-        switch (nMenu)
-        {
+        switch (nMenu){
         case 1:
             Retrieve();
             break;
@@ -54,12 +51,12 @@ int main()
             std::cout << "Please enter the correct switch number." << "\n";
             break;
         }
+
     }
     return 0;
 }
 
-void PrintMenu()
-{
+void PrintMenu(){
     cout<<"*********************"<<endl;
     cout<<"1. Retrieve"<<endl;
     cout<<"2. Add"<<endl;
@@ -71,10 +68,10 @@ void PrintMenu()
     cout<<"> ";
 }
 
-void Retrieve()
-{
-    if (mgr.GetCount()==0)
-    {
+void Retrieve(){
+    int choice = choose();
+    int count = mgr.GetCount(choice);
+    if (count==0){
         cout<<"There is no data."<<endl;
         return;
     }
@@ -85,8 +82,7 @@ void Retrieve()
     int nEnglishSum=0;
     int nMathSum=0;
 
-    for(int i=1;i<=mgr.GetCount();i++)
-    {
+    for(int i=1;i<=count;i++){
         PrintScores(i);
 
         if (nMin>=mgr.Retrieve(i).GetTotal())
@@ -117,54 +113,31 @@ void Retrieve()
             PrintScores(i);
 }
 
-void Add()
-{
-    std::cout << "Add what?\n"
-              << "(1) Student\n"
-              << "(2) Worker\n"
-              << "(3) Working Student\n";
-    int sub_input;
-    cin_int(sub_input);
-    switch(sub_input){
-    }
-    if (mgr.GetCount()==MAX_STUDENT_CNT)
-    {
+void Add(){
+    int choice = choose();
+    int count = mgr.GetCount(choice);
+    if (count==MAX_STUDENT_CNT){
         cout<<"There are the maximum number of data."<<endl;
         return;
     }
-
     student mystudent;
-
-    /*
-    auto get_score = [&mystudent](const char *msg, void (student::*fp)(int)){
-        std::cout << msg;
-        int tmp;
-        while(true){
-            cin_int(tmp);
-            if(tmp>=0&&tmp<=100){
-                (mystudent.*fp)(tmp);
-                break;
-            }else
-                std::cerr << "The entered value is not within normal range.\n";
-        }
-    };
-    */
+    //student mystudent;
     get_score("Korean?:", mystudent, &student::SetKoreanScore);
-    get_score("Math?: ", mystudent, &student::SetMathScore);
+    get_score("Math?:", mystudent, &student::SetMathScore);
     get_score("English?:", mystudent, &student::SetEnglishScore);
     mgr.Add(mystudent);
     PrintScores(mgr.GetCount());
     cout<<"Added!"<<endl;
 }
 
-void Delete()
-{
+void Delete(){
+    int choice = choose();
+    int count = mgr.GetCount(choice);
     int nIndex;
     cout<<"Delete No?>";
     cin_int(nIndex);
 
-    if (nIndex<1||nIndex>mgr.GetCount())
-    {
+    if (nIndex<1||nIndex>count){
         cout<<"There is no data."<<endl;
         return;
     }
@@ -174,73 +147,31 @@ void Delete()
     cout<<"Deleted!"<<endl;
 }
 
-void Update()
-{
+void Update(){
+    int choice = choose();
+    int count = mgr.GetCount(choice);
     int nIndex;
     cout<<"Update No?>";
     cin_int(nIndex);
-    if (nIndex<1||nIndex>mgr.GetCount())
-    {
+    if (nIndex<1||nIndex>count) {
         cout<<"There is no data."<<endl;
         return;
     }
 
     student mystudent;
-
-    int nKoreanScore=0;
-    while (true)
-    {
-        cout<<"Korean Score?";
-        cin_int(nKoreanScore);
-        if (nKoreanScore>=0&&nKoreanScore<=100)
-        {
-            mystudent.SetKoreanScore(nKoreanScore);
-            break;
-        }
-        else
-            cout<<"The entered value is not fot From 0 to 100."<<endl;
-    }
-
-    int nMathScore=0;
-    while (true)
-    {
-        cout<<"Math Score?";
-        cin_int(nMathScore);
-        if (nMathScore>=0&&nMathScore<=100)
-        {
-            mystudent.SetMathScore(nMathScore);
-            break;
-        }
-        else
-            cout<<"The entered value is not fot From 0 to 100."<<endl;
-    }
-
-    int nEnglishScore=0;
-    while (true)
-    {
-        cout<<"English Score?";
-        cin_int(nEnglishScore);
-        if (nEnglishScore>=0&&nEnglishScore<=100)
-        {
-            mystudent.SetEnglishScore(nEnglishScore);
-            break;
-        }
-        else
-            cout<<"The entered value is not fot From 0 to 100."<<endl;
-    }
-
+    get_score("Korean?:", mystudent, &student::SetKoreanScore);
+    get_score("Math?: ", mystudent, &student::SetMathScore);
+    get_score("English?:", mystudent, &student::SetEnglishScore);
     mgr.Update(nIndex, mystudent);
     PrintScores(nIndex);
     cout<<"Updated!"<<endl;
 }
 
-void Quit()
-{
+void Quit() {
     cout<<"Bye!"<<endl;
 }
 
-void PrintScores(int nIndex)
-{
+void PrintScores(int nIndex) {
     cout<<nIndex<<"."<<" Korean:"<<mgr.Retrieve(nIndex).GetKoreanScore()
         <<" Math:"<<mgr.Retrieve(nIndex).GetMathScore()
         <<" English:"<<mgr.Retrieve(nIndex).GetEnglishScore()<<endl;
@@ -252,7 +183,7 @@ void printall(){
 }
 
 void get_score(const char *msg,student& mys, void (student::*fp)(int)){
-    std::cout << msg;
+    std::cout << msg <<;
     int tmp;
     while(true){
         cin_int(tmp);
@@ -262,4 +193,14 @@ void get_score(const char *msg,student& mys, void (student::*fp)(int)){
         }else
             std::cerr << "The entered value is not within normal range.\n";
     }
+}
+
+int choose(){
+    std::cout << "Add what?\n"
+              << "(1) Student\n"
+              << "(2) Worker\n"
+              << "(3) Working Student\n";
+    int sub_input;
+    cin_int(sub_input);
+    return sub_input;
 }
