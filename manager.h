@@ -35,4 +35,5 @@ public:
     bool Delete(int nIndex);
     bool Update(int nIndex, person*);
     void printall();
+    void print_forloop(std::vector<person*>, int);
 };

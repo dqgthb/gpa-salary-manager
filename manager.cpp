@@ -43,20 +43,24 @@ void printallpersons(){
     }
 }
 
+/*
 void manager::printall(){
     auto print_forloop = [](auto ptr, auto nptr){
         for(int i = 0; i<nptr; i++){
             std::cout << std::setw(20) << std::left << "<< i >> " << std::setw(20) << " has value: " << i << "\n";
             ptr[i]->printinfo();};
     };
-
     print_forloop(vpperson, num_people);
+}
+*/
 
-    /*
-    print_forloop(pStudent, num_students);
-    print_forloop(pWorker, num_workers);
-    print_forloop(pWorkingStudent, num_working_students);
-    //Printallworkers(){};
-    //printallworkingstudents(){};
-    */
+void manager::printall(){
+    print_forloop(vpperson, num_people);
+}
+
+void manager::print_forloop(std::vector<person*> vpp, int num_people){
+    for (int i = 0; i < num_people; i++){
+        std::cout << std::setw(20) << std::left << "<< i >> " << std::setw(20) << " has value: " << i << "\n";
+        vpp[i]->printinfo();
+    }
 }

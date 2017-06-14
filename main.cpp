@@ -261,7 +261,8 @@ void update_working_student(int nIndex){
     get_score("English?:", *psw, &student::SetEnglishScore);
     get_salary("Salary?:", *psw, &worker::set_salary);
 
-    person *pp = dynamic_cast<person*>(psw);
+    //person *pp = dynamic_cast<person*>(psw);
+    person *pp = psw;
     mgr.Update(nIndex, pp);
     PrintScores(nIndex);
     cout<<"Updated!"<<endl;
