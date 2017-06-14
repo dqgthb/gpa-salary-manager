@@ -9,7 +9,6 @@ void cin_int(int& x){
     std::string input;
     while(getline(std::cin, input)){
         std::stringstream(input) >> x;
-        std::cout << "hello" << "\n";
     }
 }
 */
