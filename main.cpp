@@ -187,7 +187,8 @@ void add_working_student(){
     get_score("English?:", *pws, &student::SetEnglishScore);
     get_salary("Salary?:", *pws, &worker::set_salary);
 
-    mgr.Add((person*)pws);
+    //mgr.Add((person*)pws);
+    mgr.Add(pws);
     PrintScores(mgr.GetCount());
     cout<<"Added!"<<endl;
 }
