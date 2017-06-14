@@ -105,10 +105,11 @@ void Retrieve(){
         cout << "current index i : " << i << endl;
         person *p_dontknow = mgr.Retrieve(i);
 
-        p_dontknow->printinfo(); // it turns out that if person::printinfo() is virtual, dynamic casting is not required. Each derived object uses what it is supposed to use.
 
-        // However, if person::printinfo() is not virtual, the following dynamic casting and type testing is required.
-        /*
+        // It turns out that if person::printinfo() is virtual, inherited printinfo function will be called automatically. The code below works fine.
+        //p_dontknow->printinfo();
+
+        // However, if person::printinfo() is not virtual, person::printinfo() is called in all cases. In order to fix this, the following dynamic casting and inheritance testing is required.
         if(working_student *p_maybews=dynamic_cast<working_student*>(p_dontknow)){
             // only working student
             p_maybews->printinfo();
@@ -119,7 +120,6 @@ void Retrieve(){
             // only worker
             p_maybew->printinfo();
         }
-        */
 
     }
 
