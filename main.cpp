@@ -16,6 +16,8 @@ void Delete();
 void Update();
 void Quit();
 void printall();
+
+void print_name(int nIndex);
 void PrintScores(int nIndex);
 void PrintSalary(int nIndex);
 
@@ -171,6 +173,7 @@ void add_student(){
     cin_score("English?:", *ps, &student::SetEnglishScore);
 
     mgr.Add(ps);
+    print_name(mgr.GetCount());
     PrintScores(mgr.GetCount());
     cout<<"Added!"<<endl;
 }
@@ -181,6 +184,7 @@ void add_worker(){
     cin_salary("Salary?:", *pw, &worker::set_salary);
 
     mgr.Add(pw);
+    print_name(mgr.GetCount());
     PrintSalary(mgr.GetCount());
     cout<<"Added!"<<endl;
 }
@@ -195,6 +199,7 @@ void add_working_student(){
 
     //mgr.Add((person*)pws);
     mgr.Add(pws);
+    print_name(mgr.GetCount());
     PrintScores(mgr.GetCount());
     cout<<"Added!"<<endl;
 }
@@ -240,28 +245,33 @@ void Update(){
 }
 void update_student(int nIndex){
     student *ps=new student();
+    ps->set_name(cin_name());
     cin_score("Korean?:", *ps, &student::SetKoreanScore);
     cin_score("Math?: ", *ps, &student::SetMathScore);
     cin_score("English?:", *ps, &student::SetEnglishScore);
 
     person *pp = dynamic_cast<person*>(ps);
     mgr.Update(nIndex, pp);
+    print_name(nIndex);
     PrintScores(nIndex);
     cout<<"Updated!"<<endl;
 }
 
 void update_worker(int nIndex){
     worker *pw=new worker();
+    pw->set_name(cin_name());
     cin_salary("Salary?:", *pw, &worker::set_salary);
 
     person *pp = dynamic_cast<person*>(pw);
     mgr.Update(nIndex, pp);
+    print_name(nIndex);
     PrintScores(nIndex);
     cout<<"Updated!"<<endl;
 }
 
 void update_working_student(int nIndex){
     working_student *psw=new working_student();
+    psw->set_name(cin_name());
     cin_score("Korean?:", *psw, &student::SetKoreanScore);
     cin_score("Math?: ", *psw, &student::SetMathScore);
     cin_score("English?:", *psw, &student::SetEnglishScore);
@@ -270,17 +280,20 @@ void update_working_student(int nIndex){
     //person *pp = dynamic_cast<person*>(psw);
     person *pp = psw;
     mgr.Update(nIndex, pp);
-    PrintScores(nIndex);
+    print_name(nIndex);
     cout<<"Updated!"<<endl;
 }
 
 void Quit() {
     cout<<"Bye!"<<endl;
 }
+void print_name(int nIndex){
+    person *pp = mgr.Retrieve(nIndex);
+    cout << "Name:" << pp->get_name() << "\n";
+}
 
 void PrintScores(int nIndex) {
     person *pp = mgr.Retrieve(nIndex);
-    cout << "debug!" << endl;
     student *sp = dynamic_cast<student*>(pp);
     cout<<nIndex<<"."<<" Korean:"<<sp->GetKoreanScore()
         <<" Math:"<<sp->GetMathScore()

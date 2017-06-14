@@ -23,6 +23,7 @@ public:
     int get_salary(){return salary;}
     void set_salary(int _salary){salary=_salary;}
     void printinfo(){
+        std::cout << std::setw(20) << std::left << "<< name >> " << std::setw(20) << " goes to memory: " << std::setw(20) << &name << std::setw(25) << " and set(get) value of " << name << "\n";
         std::cout << std::setw(20) << std::left << "<< salary >> " << std::setw(20) << " goes to memory: " << std::setw(20) << &salary << std::setw(25) << " and set(get) value of " << salary << "\n";
     }
 };
