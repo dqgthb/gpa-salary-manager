@@ -37,12 +37,6 @@ bool manager::Update(int nIndex, person *_pperson){
     return true;
 }
 
-void printallpersons(){
-    for (int i=0; i<MAX_PERSON_CNT; i++) {
-        std::cout << "test" << "\n";
-    }
-}
-
 /*
 void manager::printall(){
     auto print_forloop = [](auto ptr, auto nptr){
