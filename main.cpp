@@ -36,6 +36,7 @@ void update_working_student(int);
 manager mgr;
 
 int main(){
+
     int nMenu;
 
     while (true){
