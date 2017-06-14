@@ -37,7 +37,7 @@ bool manager::Update(int nIndex, person *_pperson){
     return true;
 }
 
-/*
+/* // Disabled for backward-compatibility. auto is not supported before c++14.
 void manager::printall(){
     auto print_forloop = [](auto ptr, auto nptr){
         for(int i = 0; i<nptr; i++){
