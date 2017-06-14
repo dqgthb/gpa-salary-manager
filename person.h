@@ -14,7 +14,7 @@ public:
     void setname(std::string _pname){pname=_pname;}
     */
 
-    virtual void printinfo();
+    virtual void printinfo()=0;
     /*
     virtual void printinfo();
     virtual int GetKoreanScore();

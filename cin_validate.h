@@ -1,6 +1,18 @@
+#ifndef CIN_VALIDATE_H
+#define CIN_VALIDATE_H
 #include <iostream>
 #include <sstream>
 #include <typeinfo>
+
+/*
+void cin_int(int& x){
+    std::string input;
+    while(getline(std::cin, input)){
+        std::stringstream(input) >> x;
+        std::cout << "hello" << "\n";
+    }
+}
+*/
 
 /*
 void cin_int(int& input){
@@ -10,40 +22,6 @@ void cin_int(int& input){
         bad = std::cin.fail();
         if(bad){
             std::cout << "Invalid input. Please enter valid int." << "\n";
-            std::cin.clear();
-            std::cin.ignore(255,'\n');
-        }
-    } while (bad);
-}
-*/
-
-int int_from_cin(){
-    int input;
-    bool bad=false;
-    do{
-        std::cin >> input;
-        bad = std::cin.fail();
-        if(bad){
-            std::cout << "Invalid input. Please enter valid int." << "\n";
-            std::cin.clear();
-            std::cin.ignore(255,'\n');
-        }
-    } while (bad);
-    return input;
-}
-
-/*
-template <typename T>
-void cin_validate(T& input){
-    bool bad=false;
-    do{
-        std::cin >> input;
-        std::cin.ignore(255, '\n');
-
-        bad = std::cin.fail();
-        std::cout << "<<bad>> is " << bad << "\n";
-        if(bad){
-            std::cout << "Invalid input. Please enter valid " << typeid(input).name() << "." << "\n";
             std::cin.clear();
             std::cin.ignore(255,'\n');
         }
@@ -66,8 +44,27 @@ void cin_int(int& ref){
     }
 }
 
+/*
 template <typename T>
-void cin_validate(T& ref){
+void cin_validate(T& input){
+    bool bad=false;
+    do{
+        std::cin >> input;
+        std::cin.ignore(255, '\n');
+
+        bad = std::cin.fail();
+        std::cout << "<<bad>> is " << bad << "\n";
+        if(bad){
+            std::cout << "Invalid input. Please enter valid " << typeid(input).name() << "." << "\n";
+            std::cin.clear();
+            std::cin.ignore(255,'\n');
+        }
+    } while (bad);
+}
+*/
+
+template <typename T>
+void cin_valid(T& ref){
     std::string in;
     while(true){
         //std::cout << "type "<< typeid(ref).name() << ": "; // for debugging
@@ -80,3 +77,5 @@ void cin_validate(T& ref){
         std::cerr << "Invalid input. Please try again.\n";
     }
 }
+
+#endif /* CIN_VALIDATE_H */

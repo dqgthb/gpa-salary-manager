@@ -17,12 +17,16 @@ void Update();
 void Quit();
 void printall();
 void PrintScores(int nIndex);
+void PrintSalary(int nIndex);
 void get_score(const char*, student&, void (student::*fp)(int));
 void get_salary(const char*, worker&, void (worker::*fp)(int));
 int choose();
 void add_student();
 void add_worker();
 void add_working_student();
+void update_student(int);
+void update_worker(int);
+void update_working_student(int);
 
 manager mgr;
 
@@ -86,10 +90,25 @@ void Retrieve(){
     int nKoreanSum=0;
     int nEnglishSum=0;
     int nMathSum=0;
+    */
 
     for(int i=1;i<=count;i++){
-        PrintScores(i);
+        cout << "current index i : " << i << endl;
+        person *p_dontknow = mgr.Retrieve(i);
+        if(working_student *p_maybews=dynamic_cast<working_student*>(p_dontknow)){
+            p_maybews->printinfo();
+        }
+        else if(student *p_maybes=dynamic_cast<student*>(p_dontknow)){
+            p_maybes->printinfo();
 
+        }else if(worker *p_maybew=dynamic_cast<worker*>(p_dontknow)){
+            p_maybew->printinfo();
+
+        }
+
+    }
+
+        /*
         if (nMin>=mgr.Retrieve(i).GetTotal())
             nMin=mgr.Retrieve(i).GetTotal();
 
@@ -117,6 +136,7 @@ void Retrieve(){
         if (nMin==mgr.Retrieve(i).GetTotal())
             PrintScores(i);
     */
+
 }
 
 void Add(){
@@ -156,7 +176,7 @@ void add_worker(){
     get_salary("Salary?:", *pw, &worker::set_salary);
 
     mgr.Add(pw);
-    PrintScores(mgr.GetCount());
+    PrintSalary(mgr.GetCount());
     cout<<"Added!"<<endl;
 }
 
@@ -197,14 +217,51 @@ void Update(){
         cout<<"There is no data."<<endl;
         return;
     }
+    int choice = choose();
+    switch(choice){
+    case 1:
+        update_student(nIndex);
+        break;
+    case 2:
+        update_worker(nIndex);
+        break;
+    case 3:
+        update_working_student(nIndex);
+        break;
+    }
 
-    student mystudent;
-    get_score("Korean?:", mystudent, &student::SetKoreanScore);
-    get_score("Math?: ", mystudent, &student::SetMathScore);
-    get_score("English?:", mystudent, &student::SetEnglishScore);
+}
+void update_student(int nIndex){
+    student *ps=new student();
+    get_score("Korean?:", *ps, &student::SetKoreanScore);
+    get_score("Math?: ", *ps, &student::SetMathScore);
+    get_score("English?:", *ps, &student::SetEnglishScore);
 
-    person *ps = &mystudent;
-    mgr.Update(nIndex, ps);
+    person *pp = dynamic_cast<person*>(ps);
+    mgr.Update(nIndex, pp);
+    PrintScores(nIndex);
+    cout<<"Updated!"<<endl;
+}
+
+void update_worker(int nIndex){
+    worker *pw=new worker();
+    get_salary("Salary?:", *pw, &worker::set_salary);
+
+    person *pp = dynamic_cast<person*>(pw);
+    mgr.Update(nIndex, pp);
+    PrintScores(nIndex);
+    cout<<"Updated!"<<endl;
+}
+
+void update_working_student(int nIndex){
+    working_student *psw=new working_student();
+    get_score("Korean?:", *psw, &student::SetKoreanScore);
+    get_score("Math?: ", *psw, &student::SetMathScore);
+    get_score("English?:", *psw, &student::SetEnglishScore);
+    get_salary("Salary?:", *psw, &worker::set_salary);
+
+    person *pp = dynamic_cast<person*>(psw);
+    mgr.Update(nIndex, pp);
     PrintScores(nIndex);
     cout<<"Updated!"<<endl;
 }
@@ -215,11 +272,13 @@ void Quit() {
 
 void PrintScores(int nIndex) {
     person *pp = mgr.Retrieve(nIndex);
+    cout << "debug!" << endl;
     student *sp = dynamic_cast<student*>(pp);
     cout<<nIndex<<"."<<" Korean:"<<sp->GetKoreanScore()
         <<" Math:"<<sp->GetMathScore()
         <<" English:"<<sp->GetEnglishScore()<<endl;
 }
+
 void PrintSalary(int nIndex){
     person *pp = mgr.Retrieve(nIndex);
     worker *wp = dynamic_cast<worker*>(pp);
@@ -235,7 +294,7 @@ void get_score(const char *msg,student& mys, void (student::*fp)(int)){
     std::cout << msg;
     int tmp;
     for(;;){
-        cin_validate(tmp);
+        cin_int(tmp);
         if(tmp>=0&&tmp<=100){
             (mys.*fp)(tmp);
             break;
@@ -248,7 +307,7 @@ void get_salary(const char *msg, worker& myw, void (worker::*fp)(int)){
     std::cout << msg;
     int tmp;
     for(;;){
-        cin_validate(tmp);
+        cin_int(tmp);
         if(tmp>=0){
             (myw.*fp)(tmp);
             break;
@@ -258,11 +317,16 @@ void get_salary(const char *msg, worker& myw, void (worker::*fp)(int)){
 }
 
 int choose(){
-    std::cout << "Add what?\n"
-              << "(1) Student\n"
-              << "(2) Worker\n"
-              << "(3) Working Student\n";
     int sub_input;
-    cin_int(sub_input);
-    return sub_input;
+    do{
+        std::cout << "Add what?\n"
+                << "(1) Student\n"
+                << "(2) Worker\n"
+                << "(3) Working Student\n";
+        cin_int(sub_input);
+        if(sub_input>0&&sub_input<=3)
+            return sub_input;
+        else
+            cout << "Must be between 1 to 3!\n";
+    }while(true);
 }
