@@ -18,8 +18,11 @@ void Quit();
 void printall();
 void PrintScores(int nIndex);
 void PrintSalary(int nIndex);
-void get_score(const char*, student&, void (student::*fp)(int));
-void get_salary(const char*, worker&, void (worker::*fp)(int));
+
+void cin_score(const char*, student&, void (student::*fp)(int));
+void cin_salary(const char*, worker&, void (worker::*fp)(int));
+string cin_name(void);
+
 int choose();
 void add_student();
 void add_worker();
@@ -162,9 +165,10 @@ void Add(){
 
 void add_student(){
     student *ps = new student();
-    get_score("Korean?:", *ps, &student::SetKoreanScore);
-    get_score("Math?:", *ps, &student::SetMathScore);
-    get_score("English?:", *ps, &student::SetEnglishScore);
+    ps->set_name(cin_name());
+    cin_score("Korean?:", *ps, &student::SetKoreanScore);
+    cin_score("Math?:", *ps, &student::SetMathScore);
+    cin_score("English?:", *ps, &student::SetEnglishScore);
 
     mgr.Add(ps);
     PrintScores(mgr.GetCount());
@@ -173,7 +177,8 @@ void add_student(){
 
 void add_worker(){
     worker *pw = new worker();
-    get_salary("Salary?:", *pw, &worker::set_salary);
+    pw->set_name(cin_name());
+    cin_salary("Salary?:", *pw, &worker::set_salary);
 
     mgr.Add(pw);
     PrintSalary(mgr.GetCount());
@@ -182,10 +187,11 @@ void add_worker(){
 
 void add_working_student(){
     working_student *pws = new working_student();
-    get_score("Korean?:", *pws, &student::SetKoreanScore);
-    get_score("Math?:", *pws, &student::SetMathScore);
-    get_score("English?:", *pws, &student::SetEnglishScore);
-    get_salary("Salary?:", *pws, &worker::set_salary);
+    pws->set_name(cin_name());
+    cin_score("Korean?:", *pws, &student::SetKoreanScore);
+    cin_score("Math?:", *pws, &student::SetMathScore);
+    cin_score("English?:", *pws, &student::SetEnglishScore);
+    cin_salary("Salary?:", *pws, &worker::set_salary);
 
     //mgr.Add((person*)pws);
     mgr.Add(pws);
@@ -234,9 +240,9 @@ void Update(){
 }
 void update_student(int nIndex){
     student *ps=new student();
-    get_score("Korean?:", *ps, &student::SetKoreanScore);
-    get_score("Math?: ", *ps, &student::SetMathScore);
-    get_score("English?:", *ps, &student::SetEnglishScore);
+    cin_score("Korean?:", *ps, &student::SetKoreanScore);
+    cin_score("Math?: ", *ps, &student::SetMathScore);
+    cin_score("English?:", *ps, &student::SetEnglishScore);
 
     person *pp = dynamic_cast<person*>(ps);
     mgr.Update(nIndex, pp);
@@ -246,7 +252,7 @@ void update_student(int nIndex){
 
 void update_worker(int nIndex){
     worker *pw=new worker();
-    get_salary("Salary?:", *pw, &worker::set_salary);
+    cin_salary("Salary?:", *pw, &worker::set_salary);
 
     person *pp = dynamic_cast<person*>(pw);
     mgr.Update(nIndex, pp);
@@ -256,10 +262,10 @@ void update_worker(int nIndex){
 
 void update_working_student(int nIndex){
     working_student *psw=new working_student();
-    get_score("Korean?:", *psw, &student::SetKoreanScore);
-    get_score("Math?: ", *psw, &student::SetMathScore);
-    get_score("English?:", *psw, &student::SetEnglishScore);
-    get_salary("Salary?:", *psw, &worker::set_salary);
+    cin_score("Korean?:", *psw, &student::SetKoreanScore);
+    cin_score("Math?: ", *psw, &student::SetMathScore);
+    cin_score("English?:", *psw, &student::SetEnglishScore);
+    cin_salary("Salary?:", *psw, &worker::set_salary);
 
     //person *pp = dynamic_cast<person*>(psw);
     person *pp = psw;
@@ -292,7 +298,7 @@ void printall(){
     mgr.printall();
 }
 
-void get_score(const char *msg,student& mys, void (student::*fp)(int)){
+void cin_score(const char *msg,student& mys, void (student::*fp)(int)){
     std::cout << msg;
     int tmp;
     for(;;){
@@ -305,7 +311,7 @@ void get_score(const char *msg,student& mys, void (student::*fp)(int)){
     }
 }
 
-void get_salary(const char *msg, worker& myw, void (worker::*fp)(int)){
+void cin_salary(const char *msg, worker& myw, void (worker::*fp)(int)){
     std::cout << msg;
     int tmp;
     for(;;){
@@ -331,4 +337,11 @@ int choose(){
         else
             cout << "Must be between 1 to 3!\n";
     }while(true);
+}
+
+string cin_name(){
+    cout << "name?:";
+    string in;
+    cin_valid(in);
+    return in;
 }

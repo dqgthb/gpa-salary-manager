@@ -21,6 +21,7 @@ bool manager::Delete(int nIndex){
     if (nIndex<1||nIndex>num_people){
         return false;
     }
+    delete vpperson[nIndex-1];
 
     for (int i=nIndex;i<num_people;i++){
         vpperson[i-1]=vpperson[i];

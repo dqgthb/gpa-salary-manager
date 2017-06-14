@@ -7,6 +7,7 @@ class working_student: public student ,public worker
 {
 public:
     working_student(){salary=0; nKoreanScore=0; nEnglishScore=0; nMathScore=0;};
+    //~working_student(){std::cout<<"The working student with the name (" << name << ") is deleted!\n";}
     /*
     working_student(working_student& orig): student(), worker(){
         nKoreanScore=orig.nKoreanScore;

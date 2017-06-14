@@ -10,6 +10,7 @@ protected:
 public:
     worker(){salary=0;}
     worker(int _salary){salary=_salary;}
+    //~worker(){std::cout<<"The worker with the name ("<< name <<") is deleted!\n";}
 
     /*
     worker(worker& orig):person(){

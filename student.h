@@ -11,6 +11,7 @@ protected:
 
 public:
     student();
+    //~student(){ std::cout << "The student with the name("<< name << ") is deleted!\n"; }
     int GetKoreanScore();
     int GetEnglishScore();
     int GetMathScore();

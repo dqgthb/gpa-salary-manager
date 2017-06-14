@@ -4,10 +4,13 @@
 
 class person{
 protected:
-    //std::string pname;
+    std::string name;
 public:
     person(){};
     virtual ~person(){};
+    std::string get_name(){return name;}
+    void set_name(std::string _name){ name=_name; }
+
     /*
     person(std::string _pname):pname(_pname){}
     std::string getname(){return pname;}
