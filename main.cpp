@@ -147,7 +147,7 @@ void Retrieve(){
 
 void Add(){
     int count = mgr.GetCount();
-    if(count==MAX_STUDENT_CNT){
+    if(count==MAX_PERSON_CNT){
         cout<<"There are the maximum number of data."<<endl;
         return;
     }

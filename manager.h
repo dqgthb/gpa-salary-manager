@@ -5,16 +5,10 @@
 #include "working_student.h"
 #include <vector>
 
-#define MAX_STUDENT_CNT 10
-#define MAX_WORKER_CNT 10
-#define MAX_WORKING_STUDENT_CNT 10
-#define MAX_PERSON_CNT 30
+#define MAX_PERSON_CNT 3
 
 class manager {
 private:
-    int num_students;
-    int num_workers;
-    int num_working_students;
     int num_people; // Logically, this must be sum of the above three.
     /*
     student pStudent[MAX_STUDENT_CNT];
@@ -27,8 +21,6 @@ public:
     manager();
     int GetCount(int);
     int GetCount();
-    int get_num_workers(){return num_workers;};
-    int get_num_working_students(){return num_working_students;};
 
     person *Retrieve(int nIndex);
     void Add(person*);
