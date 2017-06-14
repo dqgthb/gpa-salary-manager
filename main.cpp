@@ -101,16 +101,22 @@ void Retrieve(){
     for(int i=1;i<=count;i++){
         cout << "current index i : " << i << endl;
         person *p_dontknow = mgr.Retrieve(i);
+
+        p_dontknow->printinfo(); it turns out that if person::printinfo(); is virtual, dynamic casting is not required. Each derived object uses what it is supposed to use.
+
+        // However, if person::printinfo() is not virtual, the following dynamic casting and type testing is required.
+        /*
         if(working_student *p_maybews=dynamic_cast<working_student*>(p_dontknow)){
+            // only working student
             p_maybews->printinfo();
-        }
-        else if(student *p_maybes=dynamic_cast<student*>(p_dontknow)){
+        }else if(student *p_maybes=dynamic_cast<student*>(p_dontknow)){
+            // only student
             p_maybes->printinfo();
-
         }else if(worker *p_maybew=dynamic_cast<worker*>(p_dontknow)){
+            // only worker
             p_maybew->printinfo();
-
         }
+        */
 
     }
 
@@ -198,7 +204,6 @@ void add_working_student(){
     cin_score("English?:", *pws, &student::SetEnglishScore);
     cin_salary("Salary?:", *pws, &worker::set_salary);
 
-    //mgr.Add((person*)pws);
     mgr.Add(pws);
     print_name(mgr.GetCount());
     PrintScores(mgr.GetCount());

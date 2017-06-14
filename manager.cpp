@@ -56,6 +56,6 @@ void manager::printall(){
 void manager::print_forloop(std::vector<person*> vpp, int num_people){
     for (int i = 0; i < num_people; i++){
         std::cout << std::setw(20) << std::left << "<< i >> " << std::setw(20) << " has value: " << i << "\n";
-        vpp[i]->printinfo();
+        vpp[i]->printinfo(); // This prints person::printinfo (without considering derived classes). // If person::printinfo is virtual, inherited printinfos are called.
     }
 }

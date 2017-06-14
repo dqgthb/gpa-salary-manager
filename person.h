@@ -18,10 +18,13 @@ public:
     void setname(std::string _pname){pname=_pname;}
     */
 
-    //virtual void printinfo()=0;
+    virtual void printinfo()=0;
+    /*
     void printinfo(){
         std::cout << std::setw(20) << std::left << "<< name >> " << std::setw(20) << " goes to memory: " << std::setw(20) << &name << std::setw(25) << " and set(get) value of " << name << "\n";
     }
+    */
+
     /*
     virtual void printinfo();
     virtual int GetKoreanScore();
