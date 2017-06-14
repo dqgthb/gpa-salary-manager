@@ -102,7 +102,7 @@ void Retrieve(){
         cout << "current index i : " << i << endl;
         person *p_dontknow = mgr.Retrieve(i);
 
-        p_dontknow->printinfo(); it turns out that if person::printinfo(); is virtual, dynamic casting is not required. Each derived object uses what it is supposed to use.
+        p_dontknow->printinfo(); // it turns out that if person::printinfo() is virtual, dynamic casting is not required. Each derived object uses what it is supposed to use.
 
         // However, if person::printinfo() is not virtual, the following dynamic casting and type testing is required.
         /*
