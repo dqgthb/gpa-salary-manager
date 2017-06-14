@@ -1,43 +1,35 @@
 #include "student.h"
 
-student::student()
-{
+student::student(){
    nKoreanScore=0;
    nEnglishScore=0;
    nMathScore=0;
 }
 
-int student::GetKoreanScore()
-{
+int student::GetKoreanScore(){
    return nKoreanScore;
 }
 
-int student::GetEnglishScore()
-{
+int student::GetEnglishScore(){
    return nEnglishScore;
 }
 
-int student::GetMathScore()
-{
+int student::GetMathScore(){
    return nMathScore;
 }
 
-int student::GetTotal()
-{
+int student::GetTotal(){
    return nKoreanScore+nEnglishScore+ nMathScore;
 }
 
-void student::SetKoreanScore(int _nKoreanScore)
-{
+void student::SetKoreanScore(int _nKoreanScore){
    nKoreanScore=_nKoreanScore;
 }
 
-void student::SetEnglishScore(int _nEnglishScore)
-{
+void student::SetEnglishScore(int _nEnglishScore){
    nEnglishScore=_nEnglishScore;
 }
 
-void student::SetMathScore(int _nMathScore)
-{
+void student::SetMathScore(int _nMathScore){
    nMathScore=_nMathScore;
 }

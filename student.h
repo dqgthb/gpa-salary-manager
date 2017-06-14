@@ -1,9 +1,9 @@
 #pragma once
 #include<iomanip>
 #include<iostream>
+#include "person.h"
 
-class student
-{
+class student: virtual public person{
 protected:
     int nKoreanScore;
     int nEnglishScore;
