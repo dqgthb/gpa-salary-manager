@@ -9,13 +9,14 @@
 
 using namespace std;
 
+// prototypes
 void PrintMenu();
 void Retrieve();
 void Add();
 void Delete();
 void Update();
 void Quit();
-void printall();
+//void printall();
 
 void print_name(int nIndex);
 void PrintScores(int nIndex);
@@ -23,9 +24,9 @@ void PrintSalary(int nIndex);
 
 void cin_score(const char*, student&, void (student::*fp)(int));
 void cin_salary(const char*, worker&, void (worker::*fp)(int));
+int choose();
 string cin_name(void);
 
-int choose();
 void add_student();
 void add_worker();
 void add_working_student();
@@ -59,9 +60,11 @@ int main(){
         case 5:
             Quit();
             return 0;
+            /*
         case 6:
             printall();
             break;
+            */
         default:
             std::cout << "Please enter the correct switch number." << "\n";
             break;
@@ -78,7 +81,7 @@ void PrintMenu(){
     cout<<"3. Delete"<<endl;
     cout<<"4. Update"<<endl;
     cout<<"5. Quit"<<endl;
-    std::cout << "6. Print all data" << "\n";
+    //std::cout << "6. Print all data" << "\n";
     cout<<"*********************"<<endl;
     cout<<"> ";
 }
@@ -312,10 +315,12 @@ void PrintSalary(int nIndex){
     cout<<nIndex<<"."<<" Salary:"<<wp->get_salary()<<endl;
 }
 
+/* sealed as this is unnecessary (the project is conpleted).
 void printall(){
     std::cout << "printall!" << "\n";
     mgr.printall();
 }
+*/
 
 void cin_score(const char *msg,student& mys, void (student::*fp)(int)){
     std::cout << msg;
