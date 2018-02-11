@@ -34,12 +34,16 @@ void cin_int(int& ref){
     std::string in;
     while(true){
         getline(std::cin, in);
+        if(std::cin.eof()){
+            std::cerr << "cin_int: eof!\n";
+            exit(1);
+        }
         std::stringstream ss(in);
         if(ss >> ref && !(ss >> in)) return;
         // (ss >> out) checks for valid conversion to integer
         // !(ss >> in) checks for unconverted input and rejects it
         std::cin.clear(); // in case of a cin error, like eof() -- prevent infinite loop
-        std::cerr << "Invalid input. Please try again.\n";
+        std::cerr << "cin_int: Invalid input. Please try again.\n";
     }
 }
 
